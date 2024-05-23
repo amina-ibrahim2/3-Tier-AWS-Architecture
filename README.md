@@ -22,21 +22,21 @@ A 3-tier architecture consists of the following layers:
 
 ### Redundancy
 
-- **Multiple Instances**: By running multiple instances of each tier, the architecture can continue to operate even if one instance fails. This is achieved by having redundant instances of web servers, application servers, and database replicas.
-- **Failover Mechanisms**: In the Data Tier, databases can be configured with failover mechanisms where a secondary database instance can take over if the primary instance fails.
+- **Multiple Instances**: By running multiple instances in each tier, the architecture can continue to operate even if one instance fails.
+- **Failover Mechanisms**: In the Data Tier, if the main database fails, a backup database can automatically take over.
 
 ### Fault Tolerance
 
 - **Isolation of Tiers**: Each tier is isolated from the others. If an issue arises in one tier, it does not directly affect the other tiers. For example, a failure in the Application Tier does not bring down the web servers in the Presentation Tier or the databases in the Data Tier.
-- **Automated Recovery**: Cloud providers like AWS offer services that can automatically recover instances, replace unhealthy ones, and maintain the desired state of the architecture, contributing to overall fault tolerance.
+- **Automated Recovery**: AWS offer services that can automatically recover instances, replace unhealthy ones, and maintain the desired state of the architecture, contributing to overall fault tolerance.
 
 ## Project Structure
 
-- **provider.tf**: Configures the AWS provider.
-- **networking.tf**: Defines VPC, subnets, internet gateway, and route tables.
-- **security_groups.tf**: Defines security groups for each tier.
-- **instances.tf**: Launches EC2 instances for the web, application, and database servers.
-- **outputs.tf**: Provides the output variables such as public and private IPs of the instances.
+- Configure the AWS provider.
+- Define VPC, subnets, internet gateway, and route tables.
+- Define security groups for each tier.
+- Launch EC2 instances for the web, application, and database servers.
+- Provide the output variables such as public and private IPs of the instances.
 
 ## How to Deploy
 
