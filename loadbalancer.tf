@@ -5,11 +5,11 @@ resource "aws_lb" "three-tier_LB" {
   security_groups    = [aws_security_group.three_tier_lb_sg.id]
 
   subnet_mapping {
-    subnet_id = module.public_web_subnet_1.subnet_id
+    subnet_id = module.public_web_subnet_1.id
   }
 
   subnet_mapping {
-    subnet_id = module.public_web_subnet_2.subnet_id
+    subnet_id =module.public_web_subnet_2.id
   }
 
 }

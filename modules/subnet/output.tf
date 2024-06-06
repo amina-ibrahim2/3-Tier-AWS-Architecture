@@ -1,5 +1,5 @@
 output "id" {
-  value = aws_subnet.main.id
+  value = aws_subnet.main.arn
 }
 
 output "lb_dns_name" {

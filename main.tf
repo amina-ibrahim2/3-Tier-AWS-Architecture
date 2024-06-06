@@ -45,12 +45,12 @@ resource "aws_route_table" "three_tier_public_RT" {
 
 resource "aws_route_table_association" "public_RT_1" {
   route_table_id = aws_route_table.three_tier_public_RT.id
-  subnet_id      = module.public_web_subnet_1.subnet_id
+  subnet_id      = module.public_web_subnet_1.id
 }
 
 resource "aws_route_table_association" "public_RT_2" {
   route_table_id = aws_route_table.three_tier_public_RT.id
-  subnet_id      = module.public_web_subnet_2.subnet_id
+  subnet_id      = module.public_web_subnet_2.id
 }
 
 # Private RT for Application Tier 
@@ -60,7 +60,7 @@ resource "aws_route_table" "three_tier_private_RT" {
 
   route {
     cidr_block     = "0.0.0.0/0"
-    nat_gateway_id = aws_nat_gateway.three_tier-NAT.vpc_id
+    nat_gateway_id = aws_nat_gateway.three_tier-NAT.id
   }
 
   tags = {
@@ -101,20 +101,20 @@ resource "aws_route_table" "three_tier_DB_RT" {
 
 resource "aws_route_table_association" "data_RT_1" {
   route_table_id = aws_route_table.three_tier_DB_RT.id
-  subnet_id      = module.Private_DB_subnet_1.route_table_id
+  subnet_id      = module.Private_DB_subnet_1.route_table_id.id
 
 }
 
 resource "aws_route_table_association" "data_RT_2" {
   route_table_id = aws_route_table.three_tier_DB_RT.id
-  subnet_id      = module.Private_DB_subnet_2.route_table_id
+  subnet_id      = module.Private_DB_subnet_2.route_table_id.id
 
 }
 
 # NAT Gateway for Secured Internet Connectivity to Private Subnets- Located in the Public Subnet 
 
 resource "aws_nat_gateway" "three_tier-NAT" {
-  subnet_id     = module.public_web_subnet_1.subnet_id
+  subnet_id     = module.public_web_subnet_1.id
   allocation_id = aws_eip.NAT-eip.arn
 
   tags = {
@@ -131,7 +131,7 @@ resource "aws_eip" "NAT-eip" {
 # NAT Gateway for secured internet connectivity to DB Tier 
 
 resource "aws_nat_gateway" "three_tier_NAT_DB" {
-  subnet_id     = module.public_web_subnet_2.subnet_id
+  subnet_id     = module.public_web_subnet_2.id
   allocation_id = aws_eip.NAT-eip.id
 
   tags = {

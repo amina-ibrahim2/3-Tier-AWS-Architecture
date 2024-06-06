@@ -11,7 +11,7 @@ resource "aws_autoscaling_group" "app_tier_asg" {
   desired_capacity    = 3
   min_size            = 2
   max_size            = 10
-  vpc_zone_identifier = [module.private_app_subnet_2.id, module.private_app_subnet_2.id]
+  vpc_zone_identifier = [module.private_app_subnet_1,module.private_app_subnet_2.id]
   target_group_arns   = [aws_lb_target_group.three_tier_lb_tg.arn]
   health_check_type   = "EC2"
   force_delete        = true
